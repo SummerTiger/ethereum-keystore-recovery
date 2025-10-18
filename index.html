@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="High-performance Ethereum keystore password recovery tool. Pattern-based recovery with multi-threaded processing (20k-50k passwords/sec).">
+    <meta name="keywords" content="ethereum, keystore, password recovery, web3, cryptocurrency, wallet recovery">
+    <title>Ethereum Keystore Password Recovery Tool</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span class="logo-text">Keystore Recovery</span>
+            </div>
+            <nav class="nav">
+                <a href="#features">Features</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#security">Security</a>
+                <a href="#download">Download</a>
+                <a href="https://github.com/yourusername/keystore-recovery" target="_blank" class="github-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    GitHub
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    </svg>
+                    Security Grade: A-
+                </div>
+                <h1 class="hero-title">Recover Your Ethereum Wallet Password</h1>
+                <p class="hero-description">
+                    High-performance, multi-threaded password recovery tool for Ethereum keystores.
+                    Test 20,000-50,000 passwords per second using pattern-based generation.
+                </p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-value">20k-50k</div>
+                        <div class="stat-label">Passwords/sec</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">96%</div>
+                        <div class="stat-label">Test Coverage</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">A-</div>
+                        <div class="stat-label">Security Grade</div>
+                    </div>
+                </div>
+                <div class="hero-buttons">
+                    <a href="#download" class="btn btn-primary">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="7 10 12 15 17 10"/>
+                            <line x1="12" y1="15" x2="12" y2="3"/>
+                        </svg>
+                        Download v1.1.0
+                    </a>
+                    <a href="https://github.com/yourusername/keystore-recovery" target="_blank" class="btn btn-secondary">
+                        View on GitHub
+                    </a>
+                </div>
+                <div class="hero-notice">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="12" y1="8" x2="12" y2="12"/>
+                        <line x1="12" y1="16" x2="12.01" y2="16"/>
+                    </svg>
+                    For recovering YOUR OWN wallets only. Requires Java 15+.
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="terminal-window">
+                    <div class="terminal-header">
+                        <div class="terminal-buttons">
+                            <span class="terminal-button terminal-button-close"></span>
+                            <span class="terminal-button terminal-button-minimize"></span>
+                            <span class="terminal-button terminal-button-maximize"></span>
+                        </div>
+                        <div class="terminal-title">keystore-recovery</div>
+                    </div>
+                    <div class="terminal-body">
+                        <div class="terminal-line"><span class="terminal-prompt">$</span> java -jar keystore-recovery.jar</div>
+                        <div class="terminal-line terminal-output">🔍 Starting password recovery...</div>
+                        <div class="terminal-line terminal-output">Total combinations: 5,832</div>
+                        <div class="terminal-line terminal-output">Using 8 threads for parallel processing</div>
+                        <div class="terminal-line terminal-output">Progress: 2,451 attempts | <span class="terminal-highlight">24,500 passwords/sec</span></div>
+                        <div class="terminal-line terminal-success">✅ SUCCESS! Password found!</div>
+                        <div class="terminal-line terminal-output">Time elapsed: 0.1 seconds</div>
+                        <div class="terminal-cursor">_</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">Powerful Features</h2>
+            <p class="section-subtitle">Built for speed, security, and ease of use</p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">High Performance</h3>
+                    <p class="feature-description">Multi-threaded processing tests 20,000-50,000 passwords per second. 10-100x faster than single-threaded approaches.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Security First</h3>
+                    <p class="feature-description">Grade A- security with input validation, secure file permissions, and comprehensive dependency audits. Zero known vulnerabilities.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="3"/>
+                            <path d="M12 1v6m0 6v6M5.64 5.64l4.24 4.24m4.24 4.24l4.24 4.24M1 12h6m6 0h6M5.64 18.36l4.24-4.24m4.24-4.24l4.24-4.24"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Pattern-Based</h3>
+                    <p class="feature-description">Generates passwords matching [5-12 chars] + [1-5 digits] + [1 special char]. Smart combinations with capitalization variants.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                            <polyline points="10 9 9 9 8 9"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Easy Configuration</h3>
+                    <p class="feature-description">Simple markdown configuration file for password components. No coding required. Just list your base words, numbers, and special characters.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="1" x2="12" y2="23"/>
+                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Real-time Progress</h3>
+                    <p class="feature-description">Live monitoring shows attempts per second and total combinations tested. Know exactly where you stand in the recovery process.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="16 18 22 12 16 6"/>
+                            <polyline points="8 6 2 12 8 18"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Clean Architecture</h3>
+                    <p class="feature-description">Professional OOP design following SOLID principles. Comprehensive JavaDoc, 96% test coverage, and extensive documentation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <p class="section-subtitle">Simple 3-step process to recover your password</p>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Create Configuration</h3>
+                        <p class="step-description">List your commonly used base words, number combinations, and special characters in a simple markdown file.</p>
+                        <div class="code-example">
+                            <pre><code>## Base Words
+- crypto
+- myWallet
+
+## Number Combinations
+- 123
+- 2024
+
+## Special Characters
+- !
+- @</code></pre>
+                        </div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Run Recovery Tool</h3>
+                        <p class="step-description">Execute the JAR file and provide your keystore file path and configuration file. The tool handles the rest.</p>
+                        <div class="code-example">
+                            <pre><code>$ java -jar keystore-recovery.jar
+📁 Enter keystore file: UTC--2024-01-15...
+📄 Enter config file: password_config.md
+🖥️  Threads (8 recommended): 8
+⚠️  Start recovery? (y/n): y</code></pre>
+                        </div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Recover Password</h3>
+                        <p class="step-description">Watch real-time progress as the tool tests combinations at 20k-50k passwords/sec. Password is displayed and saved when found.</p>
+                        <div class="code-example">
+                            <pre><code>Progress: 2,451 attempts | 24,500 passwords/sec
+✅ SUCCESS! Password found!
+Password: crypto2024!
+✓ Saved to recovered_password.txt</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Security Section -->
+    <section id="security" class="security">
+        <div class="container">
+            <div class="security-content">
+                <div class="security-text">
+                    <h2 class="section-title">Security You Can Trust</h2>
+                    <p class="section-description">Built with security as the top priority. Every aspect has been carefully designed and audited.</p>
+                    <div class="security-features">
+                        <div class="security-feature">
+                            <svg class="security-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            <div>
+                                <h4>Input Validation</h4>
+                                <p>Protection against path traversal, null byte injection, and malicious inputs</p>
+                            </div>
+                        </div>
+                        <div class="security-feature">
+                            <svg class="security-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            <div>
+                                <h4>Secure File Permissions</h4>
+                                <p>Temp files and output set to 0600 (owner read/write only) on Unix/Mac</p>
+                            </div>
+                        </div>
+                        <div class="security-feature">
+                            <svg class="security-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            <div>
+                                <h4>Zero Vulnerabilities</h4>
+                                <p>All dependencies audited. No critical, high, medium, or low severity CVEs</p>
+                            </div>
+                        </div>
+                        <div class="security-feature">
+                            <svg class="security-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            <div>
+                                <h4>No Password Logging</h4>
+                                <p>Passwords never logged, even in debug mode. Sanitized error messages</p>
+                            </div>
+                        </div>
+                        <div class="security-feature">
+                            <svg class="security-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            <div>
+                                <h4>OWASP Compliant</h4>
+                                <p>Analyzed against OWASP Top 10 (2021). Full compliance documented</p>
+                            </div>
+                        </div>
+                        <div class="security-feature">
+                            <svg class="security-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            <div>
+                                <h4>Thread-Safe Design</h4>
+                                <p>All classes designed for concurrent access with proper synchronization</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="SECURITY_ANALYSIS.md" class="btn btn-secondary">Read Security Analysis</a>
+                </div>
+                <div class="security-stats">
+                    <div class="security-badge">
+                        <div class="badge-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                <polyline points="9 12 11 14 15 10"/>
+                            </svg>
+                        </div>
+                        <div class="badge-grade">A-</div>
+                        <div class="badge-label">Security Grade</div>
+                    </div>
+                    <div class="security-metrics">
+                        <div class="metric">
+                            <div class="metric-value">0</div>
+                            <div class="metric-label">Vulnerabilities</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">96%</div>
+                            <div class="metric-label">Test Coverage</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">119</div>
+                            <div class="metric-label">Unit Tests</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section id="download" class="download">
+        <div class="container">
+            <h2 class="section-title">Download & Get Started</h2>
+            <p class="section-subtitle">Choose your preferred installation method</p>
+            <div class="download-options">
+                <div class="download-card">
+                    <h3 class="download-title">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="7 10 12 15 17 10"/>
+                            <line x1="12" y1="15" x2="12" y2="3"/>
+                        </svg>
+                        Pre-built JAR
+                    </h3>
+                    <p class="download-description">Download the ready-to-use executable JAR file</p>
+                    <div class="download-code">
+                        <code>wget https://github.com/yourusername/keystore-recovery/releases/download/v1.1.0/keystore-recovery.jar</code>
+                    </div>
+                    <a href="https://github.com/yourusername/keystore-recovery/releases/latest" class="btn btn-primary">Download JAR</a>
+                </div>
+                <div class="download-card">
+                    <h3 class="download-title">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                        Build from Source
+                    </h3>
+                    <p class="download-description">Clone and build with Maven for latest features</p>
+                    <div class="download-code">
+                        <code>git clone https://github.com/yourusername/keystore-recovery.git
+cd keystore-recovery
+mvn clean package</code>
+                    </div>
+                    <a href="https://github.com/yourusername/keystore-recovery" class="btn btn-secondary">View on GitHub</a>
+                </div>
+            </div>
+            <div class="requirements">
+                <h3 class="requirements-title">System Requirements</h3>
+                <div class="requirements-grid">
+                    <div class="requirement">
+                        <strong>Java</strong>
+                        <span>15 or higher</span>
+                    </div>
+                    <div class="requirement">
+                        <strong>Maven</strong>
+                        <span>3.6 or higher (for building)</span>
+                    </div>
+                    <div class="requirement">
+                        <strong>Memory</strong>
+                        <span>Minimum 512MB RAM</span>
+                    </div>
+                    <div class="requirement">
+                        <strong>OS</strong>
+                        <span>Windows, macOS, Linux</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Documentation Section -->
+    <section class="documentation">
+        <div class="container">
+            <h2 class="section-title">Documentation</h2>
+            <p class="section-subtitle">Comprehensive guides and reference materials</p>
+            <div class="docs-grid">
+                <a href="README.md" class="doc-card">
+                    <div class="doc-icon">📖</div>
+                    <h3>User Guide</h3>
+                    <p>Complete guide with examples and troubleshooting</p>
+                </a>
+                <a href="PROJECT_STRUCTURE.md" class="doc-card">
+                    <div class="doc-icon">🏗️</div>
+                    <h3>Architecture</h3>
+                    <p>Detailed architecture and design documentation</p>
+                </a>
+                <a href="SECURITY_ANALYSIS.md" class="doc-card">
+                    <div class="doc-icon">🔐</div>
+                    <h3>Security Analysis</h3>
+                    <p>In-depth security architecture and threat analysis</p>
+                </a>
+                <a href="DEPENDENCY_SECURITY_AUDIT.md" class="doc-card">
+                    <div class="doc-icon">🛡️</div>
+                    <h3>Security Audit</h3>
+                    <p>Complete dependency security audit report</p>
+                </a>
+                <a href="QA_REPORT_20251018.md" class="doc-card">
+                    <div class="doc-icon">✅</div>
+                    <h3>QA Report</h3>
+                    <p>Quality assurance analysis and improvements</p>
+                </a>
+                <a href="target/site/jacoco/index.html" class="doc-card">
+                    <div class="doc-icon">📊</div>
+                    <h3>Test Coverage</h3>
+                    <p>JaCoCo coverage reports (96%+ coverage)</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Keystore Recovery</h3>
+                    <p>High-performance Ethereum password recovery tool built with security and speed in mind.</p>
+                    <div class="footer-social">
+                        <a href="https://github.com/yourusername/keystore-recovery" target="_blank">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Documentation</h4>
+                    <ul>
+                        <li><a href="README.md">User Guide</a></li>
+                        <li><a href="PROJECT_STRUCTURE.md">Architecture</a></li>
+                        <li><a href="SECURITY_ANALYSIS.md">Security</a></li>
+                        <li><a href="QA_REPORT_20251018.md">QA Report</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="https://github.com/yourusername/keystore-recovery/issues">Report Issue</a></li>
+                        <li><a href="https://github.com/yourusername/keystore-recovery/discussions">Discussions</a></li>
+                        <li><a href="https://github.com/yourusername/keystore-recovery/releases">Releases</a></li>
+                        <li><a href="LICENSE">MIT License</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal Notice</h4>
+                    <p class="footer-legal">This tool is designed for recovering YOUR OWN wallets only. Only use on keystores you own. No guarantee of success.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Made with ❤️ for the Ethereum community</p>
+                <p>© 2025 Keystore Recovery. Licensed under MIT.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

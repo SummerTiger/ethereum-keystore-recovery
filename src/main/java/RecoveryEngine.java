@@ -1,3 +1,6 @@
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -17,6 +20,8 @@ import java.util.concurrent.atomic.AtomicLong;
  * @version 1.1.0
  */
 public class RecoveryEngine {
+
+    private static final Logger logger = LoggerFactory.getLogger(RecoveryEngine.class);
 
     /** Minimum allowed thread count */
     public static final int MIN_THREADS = 1;
@@ -52,11 +57,7 @@ public class RecoveryEngine {
         if (generator == null) {
             throw new IllegalArgumentException("generator cannot be null");
         }
-        if (threadCount < MIN_THREADS || threadCount > MAX_THREADS) {
-            throw new IllegalArgumentException(
-                String.format("threadCount must be %d-%d, got: %d",
-                    MIN_THREADS, MAX_THREADS, threadCount));
-        }
+        InputValidator.validateThreadCount(threadCount, MIN_THREADS, MAX_THREADS);
 
         this.validator = validator;
         this.generator = generator;
@@ -98,6 +99,11 @@ public class RecoveryEngine {
                                 config.getNumberCombinations().size() *
                                 config.getSpecialCharacters().size();
 
+        logger.info("Starting password recovery");
+        logger.info("Pattern: [5-12 chars] + [1-5 digits] + [1 special char]");
+        logger.info("Total combinations: {}", String.format("%,d", totalCombinations));
+        logger.info("Using {} threads for parallel processing", threadCount);
+
         System.out.println("\n🔍 Starting password recovery...");
         System.out.println("Pattern: [5-12 chars] + [1-5 digits] + [1 special char]");
         System.out.println("Total combinations: " + String.format("%,d", totalCombinations));
@@ -133,6 +139,7 @@ public class RecoveryEngine {
                         break;
                     }
                 } catch (ExecutionException e) {
+                    logger.error("Task execution error", e);
                     System.err.println("⚠️  Task execution error: " + e.getMessage());
                 }
             }
@@ -147,10 +154,14 @@ public class RecoveryEngine {
 
         // Display results
         if (foundPassword != null) {
+            logger.info("Password recovery successful - attempts: {}, time: {}ms",
+                       attemptCounter.get(), totalTime);
             System.out.println("\n\n✅ SUCCESS! Password found!");
             System.out.println("Total attempts: " + String.format("%,d", attemptCounter.get()));
             System.out.println("Time elapsed: " + (totalTime / 1000.0) + " seconds");
         } else {
+            logger.info("Password not found - attempts: {}, time: {}ms",
+                       attemptCounter.get(), totalTime);
             System.out.println("\n\n❌ Password not found after " +
                              String.format("%,d", attemptCounter.get()) + " attempts");
         }

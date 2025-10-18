@@ -95,7 +95,7 @@ public final class PasswordConfig {
         List<String> numbers = new ArrayList<>();
         List<String> specials = new ArrayList<>();
 
-        String[] sections = content.split("(?=^##\\s)", Pattern.MULTILINE);
+        String[] sections = content.split("(?m)(?=^## )");
 
         for (String section : sections) {
             if (section.trim().isEmpty()) continue;
