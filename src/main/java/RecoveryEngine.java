@@ -119,11 +119,28 @@ public class RecoveryEngine {
         try {
             // Create password generation tasks
             List<String> baseList = new ArrayList<>(baseCombinations);
-            int chunkSize = Math.max(1, baseList.size() / threadCount);
 
-            for (int i = 0; i < threadCount; i++) {
+            // Handle empty base list
+            if (baseList.isEmpty()) {
+                logger.warn("No base combinations generated - check configuration");
+                System.err.println("⚠️  No base combinations generated - check configuration");
+                return new RecoveryResult(null, 0, System.currentTimeMillis() - startTime, false);
+            }
+
+            // Adjust thread count if we have fewer combinations than threads
+            int effectiveThreadCount = Math.min(threadCount, baseList.size());
+            int chunkSize = Math.max(1, baseList.size() / effectiveThreadCount);
+
+            for (int i = 0; i < effectiveThreadCount; i++) {
                 int start = i * chunkSize;
-                int end = (i == threadCount - 1) ? baseList.size() : (i + 1) * chunkSize;
+                int end = (i == effectiveThreadCount - 1) ? baseList.size() : (i + 1) * chunkSize;
+
+                // Safety check to prevent IndexOutOfBoundsException
+                if (start >= baseList.size()) {
+                    break;
+                }
+                end = Math.min(end, baseList.size());
+
                 List<String> chunk = baseList.subList(start, end);
 
                 futures.add(executor.submit(() -> processChunk(chunk, config)));

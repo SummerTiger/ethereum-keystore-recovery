@@ -3,13 +3,15 @@
 [![Java](https://img.shields.io/badge/Java-15%2B-orange.svg)](https://www.oracle.com/java/)
 [![Maven](https://img.shields.io/badge/Maven-3.6%2B-blue.svg)](https://maven.apache.org/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Build](https://img.shields.io/badge/Build-Passing-brightgreen.svg)](https://github.com)
+[![CI/CD](https://github.com/SummerTiger/ethereum-keystore-recovery/workflows/CI%2FCD%20Pipeline/badge.svg)](https://github.com/SummerTiger/ethereum-keystore-recovery/actions)
+[![Tests](https://img.shields.io/badge/Tests-170%20passing-brightgreen.svg)](https://github.com/SummerTiger/ethereum-keystore-recovery)
+[![Coverage](https://img.shields.io/badge/Coverage-96%25-brightgreen.svg)](https://github.com/SummerTiger/ethereum-keystore-recovery)
 
 A high-performance, multi-threaded Java application for recovering forgotten Ethereum keystore passwords when you remember the password pattern.
 
 ## 🌟 Features
 
-- **🚀 High Performance**: 20,000-50,000 passwords/sec with multi-threading (10-100x faster than single-threaded approaches)
+- **🚀 High Performance**: Multi-threaded password testing with optimized scrypt validation (5-10 passwords/sec per thread with Ethereum's scrypt parameters)
 - **🔧 Pattern-Based**: Generates passwords matching `[5-12 chars] + [1-5 digits] + [1 special char]`
 - **📝 Easy Configuration**: Simple markdown file for password components
 - **⚡ Real-time Progress**: Live monitoring of attempts per second
@@ -19,11 +21,15 @@ A high-performance, multi-threaded Java application for recovering forgotten Eth
 
 ## 📊 Performance
 
-| Metric | Value |
-|--------|-------|
-| Single-threaded | ~5,000-10,000 passwords/sec |
-| Multi-threaded (8 cores) | ~20,000-50,000 passwords/sec |
-| Can test | Millions of combinations in minutes |
+**Important**: Ethereum keystores use scrypt with high parameters (n=262144) for security, making each validation intentionally slow (~100-200ms).
+
+| Configuration | Passwords/Second | Time for 10,000 Combinations |
+|---------------|------------------|------------------------------|
+| Single-threaded | ~5-10 | ~16-33 minutes |
+| 4 threads | ~20-40 | ~4-8 minutes |
+| 8 threads | ~40-80 | ~2-4 minutes |
+
+**Pattern-based recovery** means you can find passwords in the first few thousand attempts rather than testing millions blindly.
 
 ## 🚀 Quick Start
 
@@ -113,7 +119,7 @@ Pattern: [5-12 chars] + [1-5 digits] + [1 special char]
 Total combinations: 5,832
 Using 8 threads for parallel processing
 
-Progress: 2,451 attempts | 24,500 passwords/sec
+Progress: 2,451 attempts | 45 passwords/sec (8 threads)
 
 ✅ SUCCESS! Password found!
 Total attempts: 2,451
@@ -492,10 +498,10 @@ mvn clean test
 ```
 
 **Test Statistics**:
-- **Total Tests**: 119
+- **Total Tests**: 170 (155 unit + 15 integration)
 - **Coverage**: 96%+ line coverage, 93%+ branch coverage
-- **Classes Tested**: PasswordConfig, PasswordGenerator, Web3jKeystoreValidator, RecoveryEngine
-- **Frameworks**: JUnit 5, Mockito 5.5.0, AssertJ 3.24.2
+- **Classes Tested**: PasswordConfig, PasswordGenerator, Web3jKeystoreValidator, RecoveryEngine, KeystoreRecoveryApp
+- **Frameworks**: JUnit 5, Mockito 5.5.0, AssertJ 3.24.2, Web3j for real keystore generation
 - **Coverage Tool**: JaCoCo 0.8.11
 
 ## 🤝 Contributing
@@ -615,7 +621,7 @@ If this tool helped you recover your wallet, please consider giving it a star! �
 - **Language**: Java 15+
 - **Lines of Code**: ~2,500 (including tests)
 - **Classes**: 8 (7 main + 1 security utility)
-- **Test Coverage**: 96%+ (119 tests)
+- **Test Coverage**: 96%+ (170 tests: 155 unit + 15 integration)
 - **Documentation Coverage**: 95%+
 - **Security Grade**: A-
 
