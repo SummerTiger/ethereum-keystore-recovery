@@ -1,0 +1,15 @@
+# Code Owners for ethereum-keystore-recovery
+# These owners will be automatically requested for review when someone opens a pull request.
+
+# Global owner - require review from @SummerTiger for all changes
+* @SummerTiger
+
+# Specific critical files require owner approval
+/.github/ @SummerTiger
+/pom.xml @SummerTiger
+/src/main/java/ @SummerTiger
+
+# Security-sensitive files
+/src/main/java/*Validator* @SummerTiger
+/src/main/java/InputValidator.java @SummerTiger
+/.github/workflows/ @SummerTiger
