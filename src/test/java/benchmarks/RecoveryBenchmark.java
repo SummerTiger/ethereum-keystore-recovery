@@ -15,6 +15,12 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+// Import main classes from default package
+import PasswordConfig;
+import PasswordGenerator;
+import Web3jKeystoreValidator;
+import RecoveryEngine;
+
 /**
  * JMH Performance Benchmarks for Ethereum Keystore Password Recovery Tool.
  *
