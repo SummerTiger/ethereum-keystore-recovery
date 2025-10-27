@@ -41,14 +41,14 @@ jobs:
 
     - name: Archive test results
       if: always()
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         name: test-results
         path: target/surefire-reports/
         retention-days: 30
 
     - name: Archive coverage reports
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         name: coverage-report
         path: target/site/jacoco/
@@ -75,7 +75,7 @@ jobs:
 
     - name: Upload security report
       if: always()
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         name: security-report
         path: target/dependency-check-report.html
@@ -102,7 +102,7 @@ jobs:
 
     - name: Upload PMD report
       if: always()
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         name: pmd-report
         path: target/pmd.xml
@@ -129,7 +129,7 @@ jobs:
       run: mvn clean package -DskipTests
 
     - name: Upload JAR artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         name: keystore-recovery-jar
         path: target/*.jar
