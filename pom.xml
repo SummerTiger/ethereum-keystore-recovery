@@ -17,7 +17,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>15</maven.compiler.source>
         <maven.compiler.target>15</maven.compiler.target>
-        <web3j.version>4.10.0</web3j.version>
+        <web3j.version>5.0.1</web3j.version>
     </properties>
 
     <dependencies>
